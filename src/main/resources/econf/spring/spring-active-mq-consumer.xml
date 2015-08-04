@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:jms="http://www.springframework.org/schema/jms"
+    xmlns:amq="http://activemq.apache.org/schema/core"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    			http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-3.2.xsd
+    			http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core-5.7.0.xsd">
+    
+	<jms:listener-container client-id="${consumer.queue.salesorder.clientid}" concurrency="1" connection-factory="jmsFactory" destination-type="queue" acknowledge="transacted">
+		<jms:listener ref="consumerService"  method="receiveMqMsg" destination="${consumer.queue.salesorder.destination}" subscription="receive mq msg for queue test.salesorder.queue"/>
+	</jms:listener-container>
+					
+</beans>
